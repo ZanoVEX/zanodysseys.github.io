@@ -1,0 +1,512 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+
+<!-- SEO / Social -->
+<title>Zanodysseys &mdash; Search</title>
+<meta name="description" content="Explore Zanzibar and Tanzania through authentic journeys — beaches, culture, safaris, and timeless experiences.">
+<meta property="og:title" content="Zanodysseys &mdash; A Journey Through The Living Past Of Zanzibar">
+<meta property="og:description" content="Discover Zanzibar’s living history — beaches, spices, and timeless culture.">
+<meta property="og:image" content="https://zanodysseys.com/images/zanodysseys-logo.png">
+<meta property="og:image:alt" content="Zanodysseys Logo">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://zanodysseys.com/">
+
+<!-- Theme / PWA -->
+<meta name="theme-color" content="#01333f">
+<meta name="apple-mobile-web-app-title" content="Zanodysseys">
+<meta name="application-name" content="Zanodysseys">
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
+
+<!-- Styles -->
+<link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css">
+<link rel="stylesheet" href="../../static/css/style.css">
+<link rel="stylesheet" href="../../static/css/layout.css">
+
+<!-- Favicons -->
+<link rel="icon" type="image/png" sizes="32x32" href="../../static/images/brand/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../static/images/brand/favicon-16x16.png">
+
+<!-- Apple Home Screen -->
+<link rel="apple-touch-icon" sizes="180x180" href="../../static/images/brand/apple-touch-icon.png">
+<link rel="apple-touch-startup-image" href="/images/apple-splash.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<!-- PWA Manifest -->
+<link rel="manifest" href="../../static/site.webmanifest">
+
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+<!-- Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Zanodysseys",
+  "url": "https://zanodysseys.com/",
+  "logo": "https://zanodysseys.com/images/zanodysseys-logo.png",
+  "sameAs": [
+    "https://www.facebook.com/zanodysseys",
+    "https://www.instagram.com/zanodysseys",
+    "https://www.linkedin.com/company/zanodysseys"
+  ]
+}
+</script>
+
+</head>
+<body class="page-inner">
+
+<style>
+:root{
+  --amba:#ec994b;
+  --blue:#01333f;
+  --dark1:#011d24;
+  --dark2:#022730;
+  --glass:rgba(255,255,255,0.06);
+  --border:rgba(255,255,255,0.07);
+  --text:#ffffff;
+  --max:1180px;
+}
+
+body{
+  margin:0;
+  background:linear-gradient(180deg,var(--dark2),var(--dark1));
+  font-family:Montserrat,sans-serif;
+  color:var(--text);
+}
+
+
+
+/* Search Hero */
+.search-container{
+  max-width:var(--max);
+  margin:60px auto 30px;
+  padding:0 20px;
+  margin-top: 100px;
+}
+.search-box{
+  background:var(--glass);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:40px;
+  box-shadow:0 15px 35px rgba(0,0,0,0.45);
+  text-align:center;
+}
+.search-box h1{
+  font-family:"Great Vibes";
+  font-size:3rem;
+  margin:0;
+  color:var(--amba);
+}
+.search-input-area{
+  margin-top:20px;
+  display:flex;
+  justify-content:center;
+  gap:10px;
+}
+.search-input-area input{
+  width:70%;
+  padding:14px 18px;
+  font-size:1.1rem;
+  border-radius:12px;
+  border:1px solid var(--border);
+  outline:none;
+  background:rgba(255,255,255,0.1);
+  color:#fff;
+}
+.search-input-area button{
+  padding:14px 22px;
+  background:var(--amba);
+  border:none;
+  border-radius:12px;
+  font-weight:700;
+  color:var(--dark2);
+  cursor:pointer;
+}
+
+/* Suggestions */
+.suggestions{
+  max-width:var(--max);
+  margin:20px auto 0;
+  padding:0 20px;
+}
+.suggestions h3{
+  color:var(--amba);
+}
+.suggestions-list{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:10px;
+}
+.suggestions-list span{
+  background:var(--glass);
+  padding:10px 16px;
+  border-radius:14px;
+  border:1px solid var(--border);
+  cursor:pointer;
+}
+
+/* Search Results */
+.results{
+  max-width:var(--max);
+  margin:40px auto;
+  padding:0 20px;
+}
+.results-grid{
+  margin-top:20px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:22px;
+}
+.result-card{
+  background:var(--glass);
+  border-radius:16px;
+  border:1px solid var(--border);
+  overflow:hidden;
+  box-shadow:0 10px 25px rgba(0,0,0,0.4);
+}
+.result-card img{
+  width:100%;
+  height:160px;
+  object-fit:cover;
+}
+.result-card .info{
+  padding:16px;
+}
+.result-card h4{
+  margin:0;
+  color:var(--amba);
+}
+.result-card p{
+  margin:6px 0 0;
+  color:#d6f7ef;
+}
+
+@media(max-width:900px){
+  .search-input-area input{width:100%;}
+  .search-input-area{flex-direction:column;}
+  .search-input-area button{width:100%;}
+}
+</style>
+<body>
+
+
+<!-- LOADING SCREEN -->
+<div id="loading-screen">
+  <div class="logo-container">
+    <img src="../../static/images/brand/zanodysseys-logo.png" class="loading-logo" alt="Zanodysseys Loading Logo">
+  </div>
+
+  <!-- TEXT BELOW LOGO -->
+  <div class="loading-text">Loading Zanzibar Experience...</div>
+</div>
+
+  
+<header class="topbar" role="banner">
+  <div class="logo">
+    <img src="../../static/images/brand/zanodysseys-logo.png" alt="Zanodysseys Logo" id="zanLogo">
+  </div>
+
+  <div class="menu-toggle" id="menuToggle">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <div class="chevron" id="chevron">
+    <svg viewBox="0 0 24 24">
+      <path d="M12 15.5l-7-7 1.4-1.4L12 12.7l5.6-5.6L19 8.5z"/>
+    </svg>
+  </div>
+  <div class="contact" id="contact">
+    <a class="email-link" href="mailto:info@zanodysseys.com">info@zanodysseys.com</a>
+  </div>  
+
+
+  <!--navigations-->
+  <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li class="menu-destinations">
+          <a href="destinations.html">Destinations </a>
+          <ul>
+            <li>
+              <a href="/destinations/zanzibar.html">Zanzibar</a>
+              
+            </li>
+            <li>
+              <a href="/destinations/mainland.html">Tanzania</a>
+              
+            </li>
+          </ul>
+        </li>
+        <li><a href="services.html">Services</a>
+          <ul>
+                <li><a href="/our-services/service-detail-transport.html">Transport</a></li>
+                <li><a href="/our-services/service-detail-hotels.html">Hotels</a></li>
+                <li><a href="/our-services/service-detail-excursions.html">Excursions</a></li>
+                <li><a href="/our-services/service-detail-safaris.html">Safaris</a></li>
+                <li><a href="/our-services/service-detail-guides.html">Guides</a></li>
+              </ul>
+        </li>
+        <li><a href="/brands/brands.html">Brands</a>
+          <ul>
+                <li><a href="/brands/kitchen.html">Swahili kitchen </a></li>
+                <li><a href="/brands/swahili-art-class.html">Beautiful Art </a></li>
+                <li><a href="/brands/swahili-henna-class.html">Henna Magic </a></li>
+              </ul>
+        </li>
+        <li><a href="/about-us/about-us.html">About </a>
+            
+          <ul>
+                <li><a href="/about-us/our-story.html">Our Story</a></li>
+                <li><a href="/about-us/team.html">Team</a></li>
+              </ul>
+        </li>
+        <li><a href="contact-us.html">Contact</a></li>
+        <li><span class="search-icon"><a href="search.html">&#128269;</a></span></li>
+      </ul>
+    </nav> 
+    
+</header> 
+
+<!-- MOBILE MENU -->
+<div class="mobile-nav" id="mobileNav">
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li>
+  <a href="destinations.html" class="toggle-sub">Destinations</a>
+  <ul>
+    <li><a href="/destinations/zanzibar.html">Zanzibar</a></li>
+    <li><a href="/destinations/mainland.html">Tanzania</a></li>
+  </ul>
+</li>
+
+    <li>
+      <a href="services.html" class="toggle-sub">Services</a>
+      <ul>
+        <li><a href="/our-services/service-detail-transport.html">Transport</a></li>
+        <li><a href="/our-services/service-detail-hotels.html">Hotels</a></li>
+        <li><a href="/our-services/service-detail-excursions.html">Excursions</a></li>
+        <li><a href="/our-services/service-detail-safaris.html">Safaris</a></li>
+        <li><a href="/our-services/service-detail-guides.html">Guides</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#" class="toggle-sub">Brands</a>
+      <ul>
+        <li><a href="/brands/kitchen.html">Swahili kitchen </a></li>
+                <li><a href="/brands/swahili-art-class.html">Beautiful Art </a></li>
+                <li><a href="/brands/swahili-henna-class.html">Henna Magic </a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#" class="toggle-sub">About</a>
+      <ul>
+        <li><a href="/about-us/our-story.html">Our Story</a></li>
+        <li><a href="/about-us/team.html">Team</a></li>
+      </ul>
+    </li>
+    <li><a href="contact-us.html">Contact</a></li>
+    <li><a href="search.html">Search</a></li>
+  </ul>
+
+</div>
+<div class="tagline"><h1 class="animated-text hero-text" id="hero-text">A Journey Through The Living Past 
+      of Zanzibar</h1>
+    </div>
+
+
+
+<!-- SEARCH BOX -->
+<section class="search-container">
+  <div class="search-box">
+    <h1>Search Your Experience</h1>
+    <div class="search-input-area">
+      <input type="text" id="searchInput" placeholder="Search for tours, destinations, classes…">
+      <button onclick="performSearch()">Search</button>
+    </div>
+  </div>
+</section>
+
+<!-- SUGGESTIONS -->
+<section class="suggestions">
+  <h3>Try searching:</h3>
+  <div class="suggestions-list">
+    <span onclick="quickSearch('Spice Tour')">Spice Tour</span>
+    <span onclick="quickSearch('Safari Blue')">Safari Blue</span>
+    <span onclick="quickSearch('Cooking Class')">Cooking Class</span>
+    <span onclick="quickSearch('Mnemba Island')">Mnemba Island</span>
+    <span onclick="quickSearch('Henna Class')">Henna Class</span>
+    <span onclick="quickSearch('Stone Town')">Stone Town</span>
+  </div>
+</section>
+
+<!-- RESULTS -->
+<section class="results">
+  <h2 style="font-family:'Great Vibes'; font-size:2.4rem; color:var(--amba);">Results</h2>
+
+  <div id="resultsGrid" class="results-grid">
+    <!-- Results appear here -->
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-container">
+    <!-- Logo & Description -->
+    <div class="footer-section">
+      <img src="images/zanodysseys-logo.png" alt="Zanodysseys Logo" class="footer-logo">
+      <p class="footer-description">
+  Designed & engineered with precision —  
+  where culture, motion, and code move as one.
+</p>
+ <div class="powered-by">
+  <span>Powered By</span>
+  <img src="images/zanocrypt-logo-web.png" alt="ZanoCrypt Lab">
+</div>
+
+    </div>
+
+    <!-- Quick Links -->
+    <div class="footer-section">
+      <h4>Quick Links</h4>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+
+        <!-- Destinations -->
+        <li class="has-submenu">
+          <a href="javascript:void(0)" class="submenu-toggle">Destinations &#9662;</a>
+          <ul class="submenu">
+  <li><a href="/destinations/zanzibar.html">Zanzibar</a></li>
+  <li><a href="/destinations/mainland.html">Tanzania</a></li>
+</ul>
+
+        </li>
+
+        <!-- Services -->
+        <li class="has-submenu">
+          <a href="javascript:void(0)" class="submenu-toggle">Services &#9662;</a>
+          <ul class="submenu">
+            <li><a href="our-services/service-detail-transport.html">Transport</a></li>
+            <li><a href="our-services/service-detail-excursions.html">Excursions</a></li>
+            <li><a href="our-services/service-detail-safaris.html">Safaris</a></li>
+            <li><a href="our-services/service-detail-guides.html">Guides</a></li>
+          </ul>
+        </li>
+        <li class="has-submenu">
+          <a href="javascript:void(0)" class="submenu-toggle">Brands &#9662;</a>
+          <ul class="submenu">
+            <li><a href="brands/kitchen.html">Swahili Kitchen</a></li>
+            <li><a href="brands/swahili-art-class.html">Beautiful art</a></li>
+            <li><a href="brands/swahili-henna-class.html">Henna Magic</a></li>
+          </ul>
+        </li>
+        
+        <li><a href="about-us.html">About</a></li>
+        <li><a href="contact-us.html">Contact</a></li>
+        <li><a href="search.html">Search</a></li>
+      </ul>
+    </div>
+
+    <!-- Contact Info -->
+    <div class="footer-section">
+      <h4>Contact Us</h4>
+      <p><i class="fa fa-phone"></i> <a href="tel:+255777560058">+255 777 560 058</a></p>
+      <p><i class="fa fa-phone"></i> <a href="tel:+255796404900">+255 796 404 900</a></p>
+      <p><i class="fa fa-envelope"></i> <a href="mailto:info@zanodysseys.com">info@zanodysseys.com</a></p>
+    </div>
+
+    <!-- Social Media -->
+    <div class="footer-section">
+      <h4>Follow Us</h4>
+      <div class="social-icons">
+  <a href="https://wa.me/255796404900" target="_blank" aria-label="WhatsApp" class="whatsapp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <a href="https://www.instagram.com/zanodysseys" target="_blank" aria-label="Instagram" class="instagram">
+    <i class="fab fa-instagram"></i>
+  </a>
+
+  <a href="https://www.facebook.com/zanodysseys" target="_blank" aria-label="Facebook" class="facebook">
+    <i class="fab fa-facebook-f"></i>
+  </a>
+
+  <a href="https://x.com/zanodysseys" target="_blank" aria-label="X (Twitter)" class="x">
+    <i class="fab fa-x-twitter"></i>
+  </a>
+</div>
+
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© <span id="year"></span> ZanOdysseys. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="js/search-data.js"></script>
+<script>
+function quickSearch(text){
+  document.getElementById('searchInput').value = text;
+  performSearch();
+}
+
+function performSearch(){
+  let query = document.getElementById('searchInput').value.toLowerCase().trim();
+  let container = document.getElementById('resultsGrid');
+
+  if (query === "") {
+    container.innerHTML = "<p>Type something to search…</p>";
+    return;
+  }
+
+  let results = searchData.filter(item =>
+    item.title.toLowerCase().includes(query) ||
+    item.description.toLowerCase().includes(query) ||
+    item.category.toLowerCase().includes(query)
+  );
+
+  if (results.length === 0) {
+    container.innerHTML = "<p>No results found.</p>";
+    return;
+  }
+
+  let html = "";
+results.forEach(r => {
+  html += `
+  <a href="${r.url}" class="result-card" style="text-decoration:none;">
+      <img src="${r.image}" alt="${r.title}">
+      <div class="info">
+        <h4>${r.title}</h4>
+        <p>${r.description}</p>
+        <small style="color:#ec994b;">${r.category}</small>
+      </div>
+  </a>
+  `;
+});
+
+  container.innerHTML = html;
+}
+</script>
+<script src="../../static/js/core.js"></script>
+
+</body>
+</html>

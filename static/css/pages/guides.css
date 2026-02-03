@@ -1,0 +1,144 @@
+/* Wrapper */
+.wrap{
+  max-width:var(--max);
+  margin:32px auto;
+  padding:0 20px;
+}
+
+/* Hero */
+.hero-g{
+  display:flex;
+  gap:28px;
+  padding:36px;
+  background:var(--glass);
+  border-radius:18px;
+  border:1px solid var(--border);
+  box-shadow:0 12px 30px rgba(0,0,0,0.45);
+}
+.hero-img-g{
+  width:420px;
+  height:300px;
+  overflow:hidden;
+  border-radius:18px;
+}
+.hero-img-g img{
+  width:100%;height:100%;object-fit:cover;
+}
+.hero-text-g h1{
+  font-family:"Great Vibes",serif;
+  font-size:3rem;
+  color:var(--amba);
+  margin:0;
+}
+.hero-text-g p{
+  max-width:600px;
+  line-height:1.6;
+  color:#e5faf7;
+}
+
+/* Section Title */
+.section-title{
+  margin-top:40px;
+}
+.section-title h2{
+  font-family:"Great Vibes",serif;
+  font-size:2.4rem;
+  margin:0;
+  color:var(--amba);
+}
+.section-title p{color:#d7f9f5;margin-top:4px;}
+
+/* Team Grid */
+.team-grid{
+  margin-top:26px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:24px;
+}
+.team-card{
+  background:var(--glass);
+  border-radius:16px;
+  padding:20px;
+  border:1px solid var(--border);
+  text-align:center;
+  box-shadow:0 12px 30px rgba(0,0,0,0.4);
+}
+.team-card img{
+  width:160px;
+  height:160px;
+  object-fit:cover;
+  border-radius:999px;
+  border:2px solid var(--amba);
+}
+.team-card h3{
+  margin:12px 0 4px;
+  color:var(--amba);
+}
+.team-card span{
+  font-size:0.9rem;
+  color:#b9eee4;
+}
+.team-card p{
+  font-size:0.9rem;
+  color:#d8fef8;
+  margin-top:10px;
+  line-height:1.5;
+}
+.langs{
+  margin-top:10px;
+  font-size:0.9rem;
+  color:#fff;
+}
+.btn-primary{
+  background:var(--amba);
+  padding:9px 14px;
+  border-radius:10px;
+  margin-top:12px;
+  display:inline-block;
+  text-decoration:none;
+  font-weight:700;
+  color:#022730;
+  font-size:0.9rem;
+}
+
+/* Specialists Section */
+.specialist-grid{
+  margin-top:26px;
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:24px;
+}
+.special-card{
+  background:var(--glass);
+  padding:26px;
+  border-radius:18px;
+  border:1px solid var(--border);
+  box-shadow:0 12px 30px rgba(0,0,0,0.4);
+}
+.special-card h3{
+  margin:0;
+  color:var(--amba);
+  font-size:1.4rem;
+}
+.special-card p{
+  color:#d7f9f5;
+  line-height:1.6;
+  margin-top:8px;
+}
+
+/* Mobile */
+@media(max-width:900px){
+  .team-grid{
+    grid-template-columns:1fr 1fr;
+  }
+  .specialist-grid{
+    grid-template-columns:1fr;
+  }
+}
+@media(max-width:600px){
+  .hero-g{flex-direction:column;}
+  .hero-img-g{width:100%;}
+  .team-grid{
+    grid-template-columns:1fr;
+  }
+}

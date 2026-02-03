@@ -1,0 +1,607 @@
+/* Hover / Touch pop-up */
+.logo img:hover,
+.logo img:active {
+  transform: scale(1.12);
+}
+header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 30px 60px 20px; /* Top padding increased */
+  position: relative;
+}
+
+/* --- TOPBAR --- */
+.topbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--pad);
+  background: linear-gradient(90deg, var(--sun-sand) 10%, var(--reef-turquoise) 20%, var(--lagoon-green)30%, var(--zanzibar-blue) 100%);
+  color: var(--text);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 0 16px rgba(0,0,0,0.35);
+  z-index: 1000;
+  overflow: visible;
+  margin-top: 0;
+}
+
+/* --- LOGO --- */
+
+.logo img {
+  height: 80px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+  cursor: pointer;
+  transition: transform 0.35s ease;
+}
+.loading-logo {
+  width: 150px; /* 👈 ideal balance */
+  max-width: 70vw; /* safety on very small screens */
+  height: auto;
+  display: block;
+  opacity: 1;
+  visibility: visible;
+  animation: rotateWave 3.5s infinite ease-in-out;
+}
+
+
+
+
+/* --- CONTACT (email area) --- */
+.contact {
+  position: absolute;
+  top: 0px;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  transition: transform 0.6s ease, opacity 0.6s ease;
+}
+.contact.hidden {
+  transform: translateY(-150%);
+  opacity: 0;
+}
+.email-link {
+ animation: glowPulse 3.8s ease-in-out infinite;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--text);
+  padding: 2px 25px;
+  background: var(--amba);
+  border: 1px solid rgba(255,255,255,0.25);
+  box-shadow: inset 0 1px 2px rgba(255,255,255,0.1), 0 4px 10px rgba(0,0,0,0.15);
+  backdrop-filter: blur(6px);
+  border-top-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  transform: perspective(500px) rotateY(-12deg) skewX(-25deg);
+  transform-origin: right;
+  transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
+}
+@keyframes glowPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 rgba(236,153,75,0);
+  }
+  50% {
+    box-shadow: 0 0 18px rgba(236,153,75,0.45);
+  }
+}
+.email-link:hover {
+  background: linear-gradient(135deg, var(--reef-turquoise), var(--sun-sand));
+  color: #002b36;
+  box-shadow: 0 6px 14px rgba(182,240,211,0.45);
+  transform: translateY(-2px);
+}
+
+/* --- CHEVRON ICON --- */
+.chevron {
+  display: none;
+  position: absolute;
+  top: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 20px;
+  cursor: pointer;
+  transition: transform 0.4s ease;
+}
+.chevron svg {
+  width: 100%;
+  height: 100%;
+  fill: var(--amba);
+  transition: transform 0.4s ease;
+}
+.chevron.active svg {
+  transform: rotate(180deg);
+}
+
+/* NAV MENU */
+  nav {
+    margin-right: 35px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 60px;
+  }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    border-radius: 40px;
+    
+  }
+
+  nav ul li {
+    text-transform: uppercase;
+    position: relative;
+    
+  }
+
+  nav ul li a {
+    font-size: 13.5px;
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 400;
+    padding: 10px 6px;
+    display: block;
+    transition: 0.3s;
+  }
+  nav ul li a.active {
+  color: var(--amba);
+  font-weight: 600;
+}
+
+
+
+  nav ul li > a::after {
+  font-size: 0.1em;
+  margin-left: 4px;
+
+}
+nav ul li ul li > a::after { content: ""; }
+
+  nav ul li a:hover {
+    color: var(--amba);
+  }
+
+  /* Dropdown (submenu) */
+  nav ul li ul {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--dark1);
+    display: none;
+    flex-direction: column;
+    min-width: 100px;
+    border-radius: 6px;
+    z-index: 10;
+  }
+
+  nav ul li:hover > ul {
+    display: flex;
+  }
+
+  nav ul li ul li {
+    width: 100%;
+  }
+
+  nav ul li ul li a {
+    font-size: 12.5px;
+    text-transform: none;  
+    padding: 10px 10px;
+    padding-bottom: 4px;
+    padding-top: 4px;
+  }
+
+  
+  /* Adjust only Destinations submenu spacing */
+  .menu-destinations > ul { 
+  gap: 0; /* remove flex gap spacing */
+  padding: 4px 0; /* tighten vertical padding */
+}
+
+
+nav ul li:nth-child(2) > ul > li a {
+  padding-top: 8px;
+  padding-bottom: 1px;   /* control space inside links */
+}
+
+
+/* Adjust padding inside the Destination submenu links */
+nav ul li:nth-child(2) > ul > li > a {
+  padding-top: 6px;
+  padding-bottom: 4px;
+}
+
+
+  /* Search Icon */
+  .search-icon {
+    font-size: 15px;
+    color: var(--text);
+    cursor: pointer;
+    transition: 0.3s;
+    position: absolute;
+    padding-top: 10px;
+  }
+
+  .search-icon:hover {
+    color: var(--amba);
+  }
+
+  /* MOBILE TOGGLE BUTTON */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 6px;
+  position: absolute;
+  right: 25px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1100;
+}
+.menu-toggle span {
+  width: 28px;
+  height: 3px;
+  background: var(--text);
+  border-radius: 4px;
+  transition: all 0.4s ease;
+}
+.menu-toggle.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+.menu-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+.menu-toggle.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+.mobile-nav {
+  max-height: 0;
+  overflow: hidden;
+  position: relative;
+  top: var(--height);
+  width: 100%;
+  background: var(--dark1);
+  flex-direction: column;
+  padding: 0 10px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+  z-index: 900;
+  transition: max-height 0.45s ease;
+}
+
+.toggle-sub + ul {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+}
+.open > .toggle-sub + ul {
+  max-height: 500px; /* adjust depending on menu content */
+}
+
+.mobile-nav.open {
+  display: flex; /* show when menuToggle is active */
+  max-height: 1000px; /* enough to hold menu */
+  padding: 10px;
+}
+
+.mobile-nav ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.mobile-nav li {
+  position: relative;
+}
+.mobile-nav a {
+  color: var(--text);
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 18px 0;
+  display: block;
+  transition: color var(--transition);
+}
+.mobile-nav a:hover {
+  color: var(--amba);
+}
+
+/* Accordion for submenus */
+.mobile-nav ul ul {
+   max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+  flex-direction: column;
+  margin-left: 12px;
+  border-left: 2px solid rgba(255,255,255,0.2);
+  padding-left: 10px;
+  animation: slideDown 0.3s ease forwards;
+}
+.mobile-nav ul ul a {
+  font-size: 12.5px;
+}
+
+.mobile-nav li.open > ul {
+  display: flex;
+  max-height: 500px;
+}
+.mobile-nav li > a.toggle-sub::after {
+  content: "▸";
+  float: right;
+  transition: transform 0.3s ease;
+}
+.mobile-nav li.open > a.toggle-sub::after {
+  transform: rotate(90deg);
+}
+
+
+.footer {
+  background: black;
+  color: #f1f1f1;
+  padding: 60px 20px 30px;
+}
+.footer-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: auto;
+}
+.footer-section a {
+  color: var(--text);
+  text-decoration: none;
+}
+.footer-section h4 {
+  color: var(--amba);
+  margin-bottom: 15px;
+  font-size: 1.1rem;
+}
+.footer-logo {
+  width: 140px;
+  margin-bottom: 10px;
+}
+.footer-description {
+  font-family: 'Great Vibes', serif;
+  font-size: 0.97rem;
+  line-height: 1.6;
+  color: #d8d8d8;
+}
+.footer-links {
+  list-style: none;
+  padding: 0;
+}
+.footer-links li {
+  margin-bottom: 8px;
+  position: relative;
+}
+/* Shared contact animation base */
+.footer-section p a,
+.contact a {
+  position: relative;
+  display: inline-block;
+  color: var(--text);
+  text-decoration: none;
+  transition: 
+    color 0.35s ease,
+    transform 0.35s ease,
+    text-shadow 0.35s ease;
+}
+
+/* Hover effect */
+.footer-section p a:hover,
+.contact a:hover {
+  color: var(--amba);
+  transform: translateY(-2px) scale(1.03);
+  text-shadow: 0 4px 12px rgba(236,153,75,0.5);
+}
+@keyframes softPulse {
+  0%, 100% { opacity: 0.85; }
+  50% { opacity: 1; }
+}
+
+.footer-section p a {
+  animation: softPulse 4.5s ease-in-out infinite;
+}
+/* ONLY contact icons (phone + email) */
+.footer-section p i {
+  margin-right: 6px;
+  color: var(--amba);
+  transition: transform 0.35s ease;
+}
+
+/* Animate icon only when hovering the link */
+.footer-section p a:hover i {
+  transform: rotate(-8deg) scale(1.15);
+  text-shadow: 0 0 10px rgba(236,153,75,0.6);
+}
+
+
+.footer-links a {
+  font-size: 13px;
+  color: #f1f1f1;
+  text-decoration: none;
+  transition: color 0.3s;
+  cursor: pointer;
+}
+.footer-links a:hover {
+  color: #00a6a6;
+}
+.submenu, .nested-submenu {
+  display: none;
+  list-style: none;
+  padding-left: 15px;
+  margin-top: 5px;
+}
+.social-icons a {
+  font-size: 1.4rem;
+  margin-right: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+.social-icons a:hover {
+  transform: translateY(-3px) scale(1.1);
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.4));
+}
+
+/* Official brand colors */
+.social-icons .whatsapp { color: #25D366; }
+.social-icons .instagram { color: #E1306C; }
+.social-icons .facebook { color: #1877F2; }
+.social-icons .x { color: #ffffff; } /* X is white on dark backgrounds */
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 20px;
+  font-size: 0.85rem;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  color: #aaa;
+}
+.powered-by {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  opacity: 0.97;
+  font-size: 0.7rem;
+}
+
+.powered-by img {
+  height: 100px;
+  width: auto;
+
+  z-index: 1000px;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+  .footer-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  .social-icons a {
+    margin: 0 8px;
+  }
+}
+@media (max-width: 720px) {
+  .chevron { display: block; left: 43%; }
+  .animated-text {
+    font-size: 1rem;
+  }
+}
+@media (max-width: 600px) {
+  .loading-logo {
+    width: 120px;
+  }
+}
+
+@media (max-width: 520px) {
+  
+  .contact { font-size: 17px; }
+  .email-link { padding: 4px 4px; }
+  .animated-text {
+    font-size: 1rem;
+  }
+}
+@media (max-width: 1000px) {
+  .chevron { left: 48%; }
+  nav { top: 50px;display: none;width: 100%; }
+  .menu-toggle { display: flex; }
+  .animated-text {
+    font-size: 2rem;
+  }
+  
+}     
+.tagline {
+  position: relative;
+  z-index: 20;
+}
+.hero {
+  position: relative;
+  margin-top: 30px;
+}
+.portrait-wrap {
+  position: absolute;
+  bottom: -40px;
+  left: 40%;
+  transform: translateX(-50%);
+  z-index: 5;
+  pointer-events: none;
+}
+@media (max-width:768px) {
+  .portrait-wrap {
+    display: none;
+  }
+}
+@media (max-width: 768px) {
+  #loading-screen img {
+    display: block !important;
+    width: 140px !important;
+    height: auto !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+}
+@media (max-width: 480px) {
+  .email-link {
+    padding: 4px 10px;
+    font-size: 13px;
+    transform: none; /* remove skew on small screens */
+    border-radius: 8px;
+  }
+}
+@media (max-width: 360px) {
+  .email-link {
+    font-size: 12px;
+    padding: 3px 8px;
+  }
+}
+/* DESTINATIONS HERO LAYOUT */
+.destinations-hero {
+  width: 100%;
+  min-height: 65vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+/* DESTINATIONS SPLIT LAYOUT */
+.destinations-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  padding: 80px 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.destination-card {
+  position: relative;
+  height: 420px;
+  border-radius: 24px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  text-decoration: none;
+}
+/* Wrapper */
+.wrap{
+  max-width:var(--max);
+  margin:32px auto;
+  padding:0 20px;
+  margin-top: 100px;
+}

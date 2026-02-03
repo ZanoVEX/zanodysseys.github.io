@@ -1,0 +1,884 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="description" content="Authentic Cultural & Tribal Tours in Mainland Tanzania. Experience living heritage with ZanOdysseys.">
+<meta property="og:title" content="Cultural & Tribal Tours | ZanOdysseys">
+<meta property="og:description" content="Explore Tanzania’s rich heritage with immersive Cultural & Tribal Tours. Discover local tribes, traditions, and authentic experiences with ZanOdysseys.">
+<meta property="og:image" content="https://zanodysseys.com/images/zanodysseys-logo.png">
+<meta property="og:image:alt" content="Zanodysseys Logo">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://zanodysseys.com/">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="theme-color" content="#01333f">
+<meta name="apple-mobile-web-app-title" content="Zanodysseys">
+<meta name="application-name" content="Zanodysseys">
+<link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css">
+<script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<!-- AOS for animations -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>   
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>  
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons.js"></script>  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script> 
+<title>Cultural & Tribal Tours | ZanOdysseys </title>
+ <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
+<!-- Favicon and Mobile Icons -->
+ 
+<!-- Favicons for browser tabs -->
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+
+<!-- Apple Home Screen icon -->
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-startup-image" href="/images/apple-splash.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="stylesheet" href="/css/odysseys-heart.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Zanodysseys",
+  "url": "https://zanodysseys.com/",
+  "logo": "https://zanodysseys.com/images/zanodysseys-logo.png",
+  "sameAs": [
+    "https://www.facebook.com/zanodysseys",
+    "https://www.instagram.com/zanodysseys",
+    "https://www.linkedin.com/company/zanodysseys"
+  ]
+}
+</script>
+</head>
+<style>
+section {
+  margin-top: 10px;
+  padding: 90px 20px;
+}
+
+h1, h2, h3 {
+  font-weight: 600;
+  letter-spacing: .4px;
+}
+
+h2 {
+  text-align: center;
+  color: var(--reef-turquoise);
+  margin-bottom: 22px;
+}
+
+p {
+  max-width: 820px;
+  margin: auto;
+  font-size: 1.05rem;
+  opacity: .95;
+}
+
+/* ===============================
+   HERO
+================================ */
+.hero {
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  background:
+    linear-gradient(rgba(1,29,36,.8), rgba(1,29,36,.9)),
+    url("images/tribal-hero.jpg") center/cover no-repeat;
+}
+
+.hero .wrap {
+  max-width: var(--max);
+  margin: auto;
+}
+
+.hero h1 {
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  color: var(--amba);
+  margin-bottom: 18px;
+}
+
+.hero p {
+  max-width: 640px;
+  font-size: 1.2rem;
+}
+
+/* ===============================
+   INTRO
+================================ */
+.intro {
+  background: linear-gradient(180deg, var(--dark1), var(--dark2));
+}
+
+/* ===============================
+   TOUR GRID
+================================ */
+.tours {
+  max-width: var(--max);
+  margin: auto;
+}
+
+.grid {
+  margin-top: 60px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 34px;
+}
+
+/* ===============================
+   CARD
+================================ */
+.card {
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  overflow: hidden;
+  backdrop-filter: blur(8px);
+  transition: transform .35s ease, box-shadow .35s ease;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 22px 50px rgba(0,0,0,.35);
+}
+
+.card img {
+  width: 100%;
+  height: 210px;
+  object-fit: cover;
+}
+
+.card .content {
+  padding: 24px;
+}
+
+.card h3 {
+  color: var(--sun-sand);
+  margin-bottom: 10px;
+}
+
+.tag {
+  display: inline-block;
+  margin-top: 14px;
+  padding: 6px 16px;
+  border-radius: 30px;
+  background: linear-gradient(135deg, var(--gold), var(--lagoon-green));
+  color: var(--blue);
+  font-size: .8rem;
+  font-weight: 600;
+}
+
+/* ===============================
+   EXPAND BUTTON
+================================ */
+.expand-btn {
+  width: 100%;
+  margin-top: 20px;
+  padding: 12px;
+  border-radius: 14px;
+  background: var(--zanzibar-blue);
+  color: var(--sun-sand);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  font-weight: 600;
+  transition: background .25s ease;
+}
+
+.expand-btn:hover {
+  background: var(--blue);
+}
+
+/* ===============================
+   EXPANDABLE DETAILS
+================================ */
+.details {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .6s ease, opacity .4s ease;
+  opacity: 0;
+}
+
+.card.expanded .details {
+  max-height: 600px;
+  opacity: 1;
+}
+
+.details-inner {
+  padding: 22px 24px 26px;
+  border-top: 1px solid var(--border);
+}
+
+.details ul {
+  list-style: none;
+}
+
+.details li {
+  margin-bottom: 10px;
+  font-size: .95rem;
+}
+
+/* ===============================
+   WHATSAPP CTA INSIDE CARD
+================================ */
+.card-cta {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 12px 28px;
+  background: linear-gradient(135deg, var(--gold), var(--lagoon-green));
+  color: var(--blue);
+  border-radius: 40px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* ===============================
+   VALUES
+================================ */
+.values {
+  background:
+    linear-gradient(rgba(4,47,62,.85), rgba(4,47,62,.85)),
+    url("images/pattern.jpg") center/cover no-repeat;
+  text-align: center;
+}
+
+.values ul {
+  list-style: none;
+  max-width: 520px;
+  margin: 40px auto 0;
+}
+
+.values li {
+  padding: 14px;
+  margin-bottom: 12px;
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+}
+
+/* ===============================
+   CTA
+================================ */
+.cta {
+  background: linear-gradient(135deg, var(--lagoon-green), var(--reef-turquoise));
+  color: var(--blue);
+  text-align: center;
+}
+
+.cta h2,
+.cta p {
+  color: var(--blue);
+}
+
+.cta a {
+  display: inline-block;
+  margin-top: 28px;
+  padding: 14px 36px;
+  background: var(--blue);
+  color: var(--sun-sand);
+  border-radius: 40px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* ===============================
+   FOOTER
+================================ */
+footer {
+  background: var(--dark2);
+  text-align: center;
+  padding: 28px 20px;
+  font-size: .85rem;
+  opacity: .8;
+}
+</style>
+<body class="page-inner">
+
+
+
+<!-- LOADING SCREEN -->
+<div id="loading-screen">
+  <div class="logo-container">
+    <img src="/images/zanodysseys-logo.png" class="loading-logo" alt="zanodysseys Loading Logo">
+  </div>
+
+  <!-- TEXT BELOW LOGO -->
+  <div class="loading-text">Loading Zanzibar Experience...</div>
+</div>
+
+  
+<header class="topbar" role="banner">
+  <div class="logo">
+    <img src="/images/zanodysseys-logo.png" alt="Zanodysseys Logo" id="zanLogo">
+  </div>
+
+  <div class="menu-toggle" id="menuToggle">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <div class="chevron" id="chevron">
+    <svg viewBox="0 0 24 24">
+      <path d="M12 15.5l-7-7 1.4-1.4L12 12.7l5.6-5.6L19 8.5z"/>
+    </svg>
+  </div>
+  <div class="contact" id="contact">
+    <a class="email-link" href="mailto:info@zanodysseys.com">info@zanodysseys.com</a>
+  </div>  
+
+
+  <!--navigations-->
+  <nav>
+      <ul>
+        <li><a href="/index.html" class="active">Home</a></li>
+        <li class="menu-destinations">
+          <a href="/destinations.html">Destinations </a>
+          <ul>
+            <li>
+              <a href="/destinations/zanzibar.html">Zanzibar</a>
+              
+            </li>
+            <li>
+              <a href="/destinations/mainland.html">Tanzania</a>
+              
+            </li>
+          </ul>
+        </li>
+        <li><a href="/services.html">Services</a>
+          <ul>
+                <li><a href="/our-services/service-detail-transport.html">Transport</a></li>
+                <li><a href="/our-services/service-detail-hotels.html">Hotels</a></li>
+                <li><a href="/our-services/service-detail-excursions.html">Excursions</a></li>
+                <li><a href="/our-services/service-detail-safaris.html">Safaris</a></li>
+                <li><a href="/our-services/service-detail-guides.html">Guides</a></li>
+              </ul>
+        </li>
+        <li><a href="/brands/brands.html">Brands</a>
+          <ul>
+                <li><a href="/brands/kitchen.html">Swahili kitchen </a></li>
+                <li><a href="/brands/swahili-art-class.html">Beautiful Art </a></li>
+                <li><a href="/brands/swahili-henna-class.html">Henna Magic </a></li>
+              </ul>
+        </li>
+        <li><a href="/about-us/about-us.html">About </a>
+            
+          <ul>
+                <li><a href="/about-us/our-story.html">Our Story</a></li>
+                <li><a href="/about-us/team.html">Team</a></li>
+              </ul>
+        </li>
+        <li><a href="/contact-us.html">Contact</a></li>
+        <li><span class="search-icon"><a href="/search.html">&#128269;</a></span></li>
+      </ul>
+    </nav> 
+    
+</header> 
+
+<!-- MOBILE MENU -->
+<div class="mobile-nav" id="mobileNav">
+  <ul>
+    <li><a href="/index.html">Home</a></li>
+    <li>
+  <a href="/destinations.html" class="toggle-sub">Destinations</a>
+  <ul>
+    <li><a href="/destinations/zanzibar.html">Zanzibar</a></li>
+    <li><a href="/destinations/mainland.html">Tanzania</a></li>
+  </ul>
+</li>
+
+    <li>
+      <a href="/services.html" class="toggle-sub">Services</a>
+      <ul>
+        <li><a href="/our-services/service-detail-transport.html">Transport</a></li>
+        <li><a href="/our-services/service-detail-hotels.html">Hotels</a></li>
+        <li><a href="/our-services/service-detail-excursions.html">Excursions</a></li>
+        <li><a href="/our-services/service-detail-safaris.html">Safaris</a></li>
+        <li><a href="/our-services/service-detail-guides.html">Guides</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#" class="toggle-sub">Brands</a>
+      <ul>
+        <li><a href="/brands/kitchen.html">Swahili kitchen </a></li>
+                <li><a href="/brands/swahili-art-class.html">Beautiful Art </a></li>
+                <li><a href="/brands/swahili-henna-class.html">Henna Magic </a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#" class="toggle-sub">About</a>
+      <ul>
+        <li><a href="/about-us/our-story.html">Our Story</a></li>
+        <li><a href="/about-us/team.html">Team</a></li>
+      </ul>
+    </li>
+    <li><a href="/contact-us.html">Contact</a></li>
+    <li><a href="/search.html">Search</a></li>
+  </ul>
+
+</div>
+
+
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <h1>Cultural & Tribal Tours</h1>
+    <p>
+      Journey into the living cultures of Mainland Tanzania —
+      guided by people, tradition, and respect.
+    </p>
+  </div>
+</section>
+
+<!-- INTRO -->
+<section class="intro">
+  <h2>The Living Heritage of Tanzania</h2>
+  <p>
+    These cultural journeys are community-led, immersive,
+    and designed to honor traditions while creating
+    meaningful connections for travelers.
+  </p>
+</section>
+
+<!-- TOURS -->
+<section class="tours">
+  <h2>Featured Cultural Experiences</h2>
+
+  <div class="grid">
+
+    <!-- CARD -->
+     <div class="card north" id="masai-culture">
+    <article class="card">
+      <img src="images/maasai.jpg" alt="Maasai Cultural Experience">
+
+      <div class="content">
+        <h3>Maasai Cultural Experience</h3>
+        <p>
+          Discover the traditions, songs, dress, and pastoral lifestyle
+          of the iconic Maasai people.
+        </p>
+        <span class="tag">Northern Tanzania</span>
+
+        <button class="expand-btn" aria-expanded="false">
+          Learn more
+        </button>
+      </div>
+
+      <div class="details">
+        <div class="details-inner">
+          <ul>
+            <li><strong>Duration:</strong> Half day or full day</li>
+            <li><strong>Includes:</strong> Village visit, cultural activities, local guide</li>
+            <li><strong>Ideal for:</strong> Culture lovers, photographers</li>
+            <li><strong>Experience:</strong> Storytelling, music, daily life</li>
+          </ul>
+
+          <a href="https://wa.me/YOURNUMBER" class="card-cta">
+            Enquire via WhatsApp
+          </a>
+        </div>
+      </div>
+    </article>
+        </div>
+    <!-- DUPLICATE CARD STRUCTURE FOR OTHER TRIBES -->
+<div class="card north" id="hadzabe">
+<article class="card">
+  <img src="images/hadzabe.jpg" alt="Hadzabe Hunter-Gatherers">
+
+  <div class="content">
+    <h3>Hadzabe Hunter-Gatherers</h3>
+    <p>
+      Meet one of the last hunter-gatherer tribes and experience ancient survival skills passed down for generations.
+    </p>
+    <span class="tag">Lake Eyasi</span>
+
+    <button class="expand-btn" aria-expanded="false">
+      Learn more
+    </button>
+  </div>
+
+  <div class="details">
+    <div class="details-inner">
+      <ul>
+        <li><strong>Duration:</strong> Half day or full day</li>
+        <li><strong>Includes:</strong> Hunting demo, cultural storytelling, local guide</li>
+        <li><strong>Ideal for:</strong> Culture enthusiasts, photographers</li>
+        <li><strong>Experience:</strong> Fire-making, tracking, traditional skills</li>
+      </ul>
+
+      <a href="https://wa.me/YOURNUMBER" class="card-cta">
+        Enquire via WhatsApp
+      </a>
+    </div>
+  </div>
+</article>
+</div>
+<div class="card Central" id="dagota">
+<article class="card">
+  <img src="images/datag.jpg" alt="Datoga Blacksmith Community">
+
+  <div class="content">
+    <h3>Datoga Blacksmith Community</h3>
+    <p>
+      Witness traditional metalwork and pastoral life shaped by resilience and heritage.
+    </p>
+    <span class="tag">Central Tanzania</span>
+
+    <button class="expand-btn" aria-expanded="false">
+      Learn more
+    </button>
+  </div>
+
+  <div class="details">
+    <div class="details-inner">
+      <ul>
+        <li><strong>Duration:</strong> Half day or full day</li>
+        <li><strong>Includes:</strong> Blacksmith demo, village tour, local guide</li>
+        <li><strong>Ideal for:</strong> Culture lovers, photographers</li>
+        <li><strong>Experience:</strong> Metalwork, pastoral life, storytelling</li>
+      </ul>
+
+      <a href="https://wa.me/YOURNUMBER" class="card-cta">
+        Enquire via WhatsApp
+      </a>
+    </div>
+  </div>
+</article>
+</div>
+<div class="card east" id="kilwa-heritage">
+  <article class="card">
+    <img src="images/kilwa.jpg" alt="Kilwa Kisiwani ruins UNESCO World Heritage Site Tanzania">
+
+    <div class="content">
+      <h3>Kilwa Heritage Tour</h3>
+      <p>
+        Discover the ancient ruins of Kilwa Kisiwani,
+        a UNESCO World Heritage Site and once the heart
+        of a powerful Swahili trading empire on the
+        Indian Ocean.
+      </p>
+      <span class="tag">mainland</span>
+
+      <button class="expand-btn" aria-expanded="false">
+        Learn more
+      </button>
+    </div>
+
+    <div class="details">
+      <div class="details-inner">
+        <ul>
+          <li><strong>Duration:</strong> 1 or 2 days</li>
+          <li><strong>Includes:</strong> Guided historical interpretation</li>
+          <li><strong>Ideal for:</strong> Culture lovers, historians & photographers</li>
+          <li>
+            <strong>Experience:</strong> Coral-stone mosques, royal palace ruins,
+            Swahili architecture, and quiet coastal landscapes
+          </li>
+        </ul>
+
+        <a href="https://wa.me/YOURNUMBER" class="card-cta">
+          Enquire via WhatsApp
+        </a>
+      </div>
+    </div>
+  </article>
+</div>
+
+<div class="card north" id="chaga-life">
+<article class="card">
+  <img src="images/chagga.jpg" alt="Chagga Life & Coffee Culture">
+
+  <div class="content">
+    <h3>Chagga Life & Coffee Culture</h3>
+    <p>
+      Experience village life on Kilimanjaro’s slopes, including coffee farming and historic caves.
+    </p>
+    <span class="tag">Mount Kilimanjaro</span>
+
+    <button class="expand-btn" aria-expanded="false">
+      Learn more
+    </button>
+  </div>
+
+  <div class="details">
+    <div class="details-inner">
+      <ul>
+        <li><strong>Duration:</strong> Half day or full day</li>
+        <li><strong>Includes:</strong> Village tour, coffee farm visit, local guide</li>
+        <li><strong>Ideal for:</strong> Culture enthusiasts & photographers</li>
+        <li><strong>Experience:</strong> Coffee farming, caves, traditional village life</li>
+      </ul>
+
+      <a href="https://wa.me/YOURNUMBER" class="card-cta">
+        Enquire via WhatsApp
+      </a>
+    </div>
+  </div>
+</article>
+</div>
+<div class="card east" id="bagamoyo-heritage">
+  <article class="card">
+    <img src="images/bagamoyo.jpg" alt="Bagamoyo historic town Swahili and colonial heritage Tanzania">
+
+    <div class="content">
+      <h3>Bagamoyo Heritage Tour</h3>
+      <p>
+        Explore Bagamoyo, one of Tanzania’s most important
+        historical towns, where Swahili culture, Arab trade,
+        European missions, and colonial history meet along
+        the Indian Ocean coast.
+      </p>
+      <span class="tag">mainland</span>
+
+      <button class="expand-btn" aria-expanded="false">
+        Learn more
+      </button>
+    </div>
+
+    <div class="details">
+      <div class="details-inner">
+        <ul>
+          <li><strong>Duration:</strong> Half day or full day</li>
+          <li><strong>Includes:</strong> Guided historical interpretation</li>
+          <li><strong>Ideal for:</strong> History enthusiasts, cultural travelers & educators</li>
+          <li>
+            <strong>Experience:</strong> Old German Boma, Kaole ruins,
+            Catholic mission museums, slave route history,
+            and traditional coastal town life
+          </li>
+        </ul>
+
+        <a href="https://wa.me/YOURNUMBER" class="card-cta">
+          Enquire via WhatsApp
+        </a>
+      </div>
+    </div>
+  </article>
+</div>
+<div class="card north" id="babati-highlands">
+  <article class="card">
+    <img src="images/babati.jpg" alt="Babati town and Lake Babati highlands Tanzania">
+
+    <div class="content">
+      <h3>Babati Highlands & Culture Tour</h3>
+      <p>
+        Discover Babati, a peaceful highland town in northern
+        Tanzania, surrounded by green hills, lakes, and rich
+        cultural traditions near Lake Manyara.
+      </p>
+      <span class="tag">mainland</span>
+
+      <button class="expand-btn" aria-expanded="false">
+        Learn more
+      </button>
+    </div>
+
+    <div class="details">
+      <div class="details-inner">
+        <ul>
+          <li><strong>Duration:</strong> Full day or 2 days</li>
+          <li><strong>Includes:</strong> Guided cultural and nature experience</li>
+          <li><strong>Ideal for:</strong> Nature lovers, hikers & cultural explorers</li>
+          <li>
+            <strong>Experience:</strong> Lake Babati views, local markets,
+            farming villages, highland landscapes, and
+            traditional communities of the Manyara region
+          </li>
+        </ul>
+
+        <a href="https://wa.me/YOURNUMBER" class="card-cta">
+          Enquire via WhatsApp
+        </a>
+      </div>
+    </div>
+  </article>
+</div>
+<div class="card east" id="pangani-coast">
+  <article class="card">
+    <img src="images/pangani.jpg" alt="Pangani Coast beaches and historic town Tanzania">
+
+    <div class="content">
+      <h3>Pangani Coast Experience</h3>
+      <p>
+        Experience the calm beauty of Pangani, a historic
+        coastal town where white-sand beaches, Swahili
+        heritage, and the Pangani River meet the Indian Ocean.
+      </p>
+      <span class="tag">mainland</span>
+
+      <button class="expand-btn" aria-expanded="false">
+        Learn more
+      </button>
+    </div>
+
+    <div class="details">
+      <div class="details-inner">
+        <ul>
+          <li><strong>Duration:</strong> Half day or full day</li>
+          <li><strong>Includes:</strong> Guided coastal and cultural exploration</li>
+          <li><strong>Ideal for:</strong> Beach lovers, couples & cultural travelers</li>
+          <li>
+            <strong>Experience:</strong> Quiet beaches, river cruises,
+            historic Swahili sites, fishing villages, and
+            relaxed coastal life
+          </li>
+        </ul>
+
+        <a href="https://wa.me/YOURNUMBER" class="card-cta">
+          Enquire via WhatsApp
+        </a>
+      </div>
+    </div>
+  </article>
+</div>
+
+
+
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="values">
+  <h2>Travel With Respect</h2>
+  <ul>
+    <li>Community-led experiences</li>
+    <li>Respect for culture & traditions</li>
+    <li>Ethical & fair tourism practices</li>
+    <li>Small groups, meaningful journeys</li>
+  </ul>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <h2>Create Your Cultural Journey</h2>
+  <p>
+    Combine cultural tours with safaris,
+    trekking, or Zanzibar extensions.
+  </p>
+  <a href="https://wa.me/YOURNUMBER">Book via WhatsApp</a>
+</section>
+
+<footer class="footer">
+  <div class="footer-container">
+    <!-- Logo & Description -->
+    <div class="footer-section">
+      <img src="/images/zanodysseys-logo.png" alt="Zanodysseys Logo" class="footer-logo">
+      <p class="footer-description">
+  Designed & engineered with precision —  
+  where culture, motion, and code move as one.
+</p>
+ <div class="powered-by">
+  <span>Powered By</span>
+  <img src="/images/zanocrypt-logo-web.png" alt="ZanoCrypt Lab">
+</div>
+
+    </div>
+
+    <!-- Quick Links -->
+    <div class="footer-section">
+      <h4>Quick Links</h4>
+      <ul class="footer-links">
+        <li><a href="/index.html">Home</a></li>
+
+        <!-- Destinations -->
+        <li class="has-submenu">
+          <a href="javascript:void(0)" class="submenu-toggle">Destinations &#9662;</a>
+          <ul class="submenu">
+  <li><a href="/destinations/zanzibar.html">Zanzibar</a></li>
+  <li><a href="/destinations/mainland.html">Tanzania</a></li>
+</ul>
+
+        </li>
+
+        <!-- Services -->
+        <li class="has-submenu">
+          <a href="javascript:void(0)" class="submenu-toggle">Services &#9662;</a>
+          <ul class="submenu">
+            <li><a href="/our-services/service-detail-transport.html">Transport</a></li>
+            <li><a href="/our-services/service-detail-excursions.html">Excursions</a></li>
+            <li><a href="/our-services/service-detail-safaris.html">Safaris</a></li>
+            <li><a href="/our-services/service-detail-guides.html">Guides</a></li>
+          </ul>
+        </li>
+        <li class="has-submenu">
+          <a href="javascript:void(0)" class="submenu-toggle">Brands &#9662;</a>
+          <ul class="submenu">
+            <li><a href="/brands/kitchen.html">Swahili Kitchen</a></li>
+            <li><a href="/brands/swahili-art-class.html">Beautiful art</a></li>
+            <li><a href="/brands/swahili-henna-class.html">Henna Magic</a></li>
+          </ul>
+        </li>
+        
+        <li><a href="/about-us.html">About</a></li>
+        <li><a href="/contact-us.html">Contact</a></li>
+        <li><a href="/search.html">Search</a></li>
+      </ul>
+    </div>
+
+    <!-- Contact Info -->
+    <div class="footer-section">
+      <h4>Contact Us</h4>
+      <p><i class="fa fa-phone"></i> <a href="tel:+255777560058">+255 777 560 058</a></p>
+      <p><i class="fa fa-phone"></i> <a href="tel:+255796404900">+255 796 404 900</a></p>
+      <p><i class="fa fa-envelope"></i> <a href="mailto:info@zanodysseys.com">info@zanodysseys.com</a></p>
+    </div>
+
+    <!-- Social Media -->
+    <div class="footer-section">
+      <h4>Follow Us</h4>
+      <div class="social-icons">
+  <a href="https://wa.me/255796404900" target="_blank" aria-label="WhatsApp" class="whatsapp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <a href="https://www.instagram.com/zanodysseys" target="_blank" aria-label="Instagram" class="instagram">
+    <i class="fab fa-instagram"></i>
+  </a>
+
+  <a href="https://www.facebook.com/zanodysseys" target="_blank" aria-label="Facebook" class="facebook">
+    <i class="fab fa-facebook-f"></i>
+  </a>
+
+  <a href="https://x.com/zanodysseys" target="_blank" aria-label="X (Twitter)" class="x">
+    <i class="fab fa-x-twitter"></i>
+  </a>
+</div>
+
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© <span id="year"></span> ZanOdysseys. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- ===============================
+     EXPAND LOGIC (SMOOTH)
+================================ -->
+<script>
+document.querySelectorAll(".expand-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const card = btn.closest(".card");
+    const expanded = card.classList.toggle("expanded");
+
+    btn.textContent = expanded ? "Show less" : "Learn more";
+    btn.setAttribute("aria-expanded", expanded);
+  });
+});
+</script>
+<script src="/js/script.js"></script>
+</body>
+</html>
