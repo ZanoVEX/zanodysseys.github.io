@@ -429,7 +429,7 @@ nav ul li:nth-child(2) > ul > li > a {
 
 
 .footer-links a {
-  font-size: 13px;
+  font-size: 16px;
   color: #f1f1f1;
   text-decoration: none;
   transition: color 0.3s;
@@ -605,3 +605,4 @@ nav ul li:nth-child(2) > ul > li > a {
   padding:0 20px;
   margin-top: 100px;
 }
+
