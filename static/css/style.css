@@ -46,8 +46,12 @@ body {
   z-index: 9999;
   overflow: hidden;
   text-align: center;
+transition: opacity 0.5s ease;
 }
-
+#loading-screen.hide {
+  opacity: 0;
+  pointer-events: none;
+}
 
 
 /* Animations */
