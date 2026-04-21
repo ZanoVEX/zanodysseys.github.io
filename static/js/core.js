@@ -1,5 +1,4 @@
 const NAV_BREAKPOINT = 1000;
-const BOOKING_SITE_PATH = "contact/?topic=booking";
 
 const menuDetails = {
   home: {
@@ -28,76 +27,6 @@ const menuDetails = {
   }
 };
 
-const menuHighlights = [
-  {
-    label: "Stone Town",
-    meta: "Historic mornings",
-    sitePath: "destinations/zanzibar.html"
-  },
-  {
-    label: "Beach Days",
-    meta: "Sandbanks and dhow light",
-    sitePath: "services/excursions.html"
-  },
-  {
-    label: "Safari Routes",
-    meta: "Mainland wilderness",
-    sitePath: "services/safaris.html"
-  }
-];
-
-const dockItems = [
-  {
-    key: "home",
-    label: "Home",
-    sitePath: "",
-    matches: ["/"],
-    icon: `
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M3 10.5 12 3l9 7.5"></path>
-        <path d="M5.5 9.5V21h13V9.5"></path>
-      </svg>
-    `
-  },
-  {
-    key: "destinations",
-    label: "Destinations",
-    sitePath: "destinations/",
-    matches: ["/destinations/"],
-    icon: `
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M12 21s6-5.2 6-11a6 6 0 1 0-12 0c0 5.8 6 11 6 11Z"></path>
-        <path d="M12 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"></path>
-      </svg>
-    `
-  },
-  {
-    key: "trips",
-    label: "Trips",
-    sitePath: "experiences/",
-    matches: ["/experiences/", "/services/"],
-    icon: `
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M8 7V5.5A1.5 1.5 0 0 1 9.5 4h5A1.5 1.5 0 0 1 16 5.5V7"></path>
-        <path d="M4.5 8.5h15A1.5 1.5 0 0 1 21 10v8.5A1.5 1.5 0 0 1 19.5 20h-15A1.5 1.5 0 0 1 3 18.5V10a1.5 1.5 0 0 1 1.5-1.5Z"></path>
-        <path d="M3 12h18"></path>
-      </svg>
-    `
-  },
-  {
-    key: "profile",
-    label: "Profile",
-    sitePath: "about/",
-    matches: ["/about/", "/contact/"],
-    icon: `
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M12 12.5a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"></path>
-        <path d="M4.5 20a7.5 7.5 0 0 1 15 0"></path>
-      </svg>
-    `
-  }
-];
-
 let topbar = null;
 let contact = null;
 let chevron = null;
@@ -105,7 +34,6 @@ let logo = null;
 let menuToggle = null;
 let mobileNav = null;
 let mobileNavBackdrop = null;
-let siteRootPath = null;
 
 function getSectionKey(label = "") {
   return String(label)
@@ -122,118 +50,10 @@ function escapeHtml(value = "") {
     .replace(/>/g, "&gt;");
 }
 
-function ensureLeadingSlash(value = "/") {
-  return value.startsWith("/") ? value : `/${value}`;
-}
-
-function ensureTrailingSlash(value = "/") {
-  if (!value) return "/";
-  return value.endsWith("/") ? value : `${value}/`;
-}
-
-function getSiteRootPath() {
-  if (siteRootPath) return siteRootPath;
-
-  const coreScript = Array.from(document.scripts || []).find(script => {
-    const src = script?.src || script?.getAttribute("src") || "";
-    return /(?:^|\/)static\/js\/core\.js(?:[?#].*)?$/i.test(src) || /(?:^|\/)core\.js(?:[?#].*)?$/i.test(src);
-  });
-
-  if (coreScript?.src) {
-    try {
-      const pathname = new URL(coreScript.src, window.location.href).pathname || "/";
-      siteRootPath = ensureTrailingSlash(pathname.replace(/static\/js\/core\.js$/i, "").replace(/\/{2,}/g, "/"));
-      return siteRootPath;
-    } catch {
-      // Fall through to DOM-based detection.
-    }
-  }
-
-  const homeLink = document.querySelector(".topbar nav a[href], .footer a[href], .logo a[href]");
-  if (homeLink) {
-    try {
-      const pathname = new URL(homeLink.getAttribute("href") || ".", window.location.href).pathname || "/";
-      siteRootPath = ensureTrailingSlash(pathname.replace(/index\.html$/i, "").replace(/\/{2,}/g, "/"));
-      return siteRootPath;
-    } catch {
-      // Fall through to the current directory.
-    }
-  }
-
-  siteRootPath = ensureTrailingSlash((new URL(".", window.location.href).pathname || "/").replace(/\/{2,}/g, "/"));
-  return siteRootPath;
-}
-
-function stripSiteRoot(pathname = "/") {
-  let value = ensureLeadingSlash(String(pathname || "/").replace(/index\.html$/i, ""));
-  const rootPath = getSiteRootPath();
-  const rootWithoutTrailingSlash = rootPath.length > 1 ? rootPath.replace(/\/+$/, "") : "/";
-  const lowerValue = value.toLowerCase();
-  const lowerRoot = rootPath.toLowerCase();
-  const lowerRootNoSlash = rootWithoutTrailingSlash.toLowerCase();
-
-  if (rootPath !== "/" && lowerValue === lowerRootNoSlash) {
-    value = "/";
-  } else if (rootPath !== "/" && lowerValue.startsWith(lowerRoot)) {
-    value = `/${value.slice(rootPath.length)}`;
-  }
-
-  value = value.replace(/\/{2,}/g, "/");
-  return value || "/";
-}
-
-function toRelativePath(fromPath = "/", toPath = "/") {
-  const fromSegments = String(fromPath || "/").split("/").filter(Boolean);
-  const toSegments = String(toPath || "/").split("/").filter(Boolean);
-  let index = 0;
-
-  while (
-    index < fromSegments.length &&
-    index < toSegments.length &&
-    fromSegments[index].toLowerCase() === toSegments[index].toLowerCase()
-  ) {
-    index += 1;
-  }
-
-  const upSegments = new Array(fromSegments.length - index).fill("..");
-  const downSegments = toSegments.slice(index);
-  let relativePath = [...upSegments, ...downSegments].join("/");
-
-  if (!relativePath) {
-    relativePath = toPath.endsWith("/") ? "./" : toSegments[toSegments.length - 1] || "./";
-  } else if (toPath.endsWith("/") && !relativePath.endsWith("/")) {
-    relativePath += "/";
-  }
-
-  return relativePath;
-}
-
-function toRelativeSiteHref(sitePath = "") {
-  const cleanPath = String(sitePath || "").trim().replace(/^\/+/, "");
-  const currentDirectory = new URL(".", window.location.href);
-  const targetUrl = new URL(cleanPath || ".", `${window.location.origin}${getSiteRootPath()}`);
-  const relativePath = toRelativePath(currentDirectory.pathname, targetUrl.pathname);
-  return `${relativePath}${targetUrl.search}${targetUrl.hash}`;
-}
-
-function rewriteRootRelativeLinks(scope = document) {
-  if (!scope?.querySelectorAll) return;
-
-  scope.querySelectorAll('a[href^="/"]:not([href^="//"])').forEach(link => {
-    const href = (link.getAttribute("href") || "").trim();
-    if (!href || /^(https?:|mailto:|tel:|javascript:|data:)/i.test(href)) return;
-    link.setAttribute("href", toRelativeSiteHref(href));
-  });
-
-  scope.querySelectorAll('form[action^="/"]:not([action^="//"])').forEach(form => {
-    const action = (form.getAttribute("action") || "").trim();
-    if (!action || /^(https?:|mailto:|tel:|javascript:|data:)/i.test(action)) return;
-    form.setAttribute("action", toRelativeSiteHref(action));
-  });
-}
-
 function normalizePath(value = "") {
-  if (!value) return "/";
+  if (!value) {
+    value = window.location.pathname || "/";
+  }
   if (/^(mailto:|tel:|javascript:|data:)/i.test(value)) return "";
 
   try {
@@ -242,13 +62,7 @@ function normalizePath(value = "") {
     value = value.split(/[?#]/)[0] || "/";
   }
 
-  value = stripSiteRoot(value);
   value = value.replace(/index\.html$/i, "");
-
-  if (!value.startsWith("/")) {
-    value = `/${value}`;
-  }
-
   value = value.replace(/\/{2,}/g, "/");
 
   if (value.length > 1) {
@@ -258,10 +72,146 @@ function normalizePath(value = "") {
   return value || "/";
 }
 
-function isPathWithin(currentPath, targetPath) {
+function isPathWithin(currentPath, targetPath, exact = false) {
   if (!targetPath) return false;
-  if (targetPath === "/") return currentPath === "/";
+  if (exact) return currentPath === targetPath;
   return currentPath === targetPath || currentPath.startsWith(`${targetPath}/`);
+}
+
+function findMenuItem(menuData, label = "") {
+  const key = getSectionKey(label);
+  return menuData.find(item => getSectionKey(item.label) === key) || null;
+}
+
+function findMenuChildHref(item, label = "") {
+  if (!item || !Array.isArray(item.children)) return "";
+  const key = getSectionKey(label);
+  const child = item.children.find(entry => getSectionKey(entry.label) === key);
+  return child ? child.href : "";
+}
+
+function findDocumentHref(selectors = []) {
+  for (const selector of selectors) {
+    const link = document.querySelector(selector);
+    const href = (link?.getAttribute("href") || "").trim();
+
+    if (href && href !== "#" && !/^javascript:/i.test(href)) {
+      return href;
+    }
+  }
+
+  return "";
+}
+
+function getBookingHref(menuData) {
+  return (
+    findDocumentHref([
+      'a[href*="?topic=booking"]',
+      'a[href*="?topic=proposal"]',
+      'a[href*="?topic=services"]',
+      'a[href*="?topic=experiences"]',
+      'a[href*="?service="]',
+      'a[href*="?transfer="]'
+    ]) ||
+    findMenuItem(menuData, "Contact")?.href ||
+    "#"
+  );
+}
+
+function buildMenuHighlights(menuData) {
+  const destinations = findMenuItem(menuData, "Destinations");
+  const services = findMenuItem(menuData, "Services");
+
+  return [
+    {
+      label: "Stone Town",
+      meta: "Historic mornings",
+      href:
+        findDocumentHref(['a[href*="stone-town.html"]']) ||
+        findMenuChildHref(destinations, "Zanzibar") ||
+        destinations?.href ||
+        "#"
+    },
+    {
+      label: "Beach Days",
+      meta: "Sandbanks and dhow light",
+      href:
+        findDocumentHref(['a[href*="excursions.html"]']) ||
+        findMenuChildHref(services, "Excursions") ||
+        services?.href ||
+        "#"
+    },
+    {
+      label: "Safari Routes",
+      meta: "Mainland wilderness",
+      href:
+        findDocumentHref(['a[href*="safaris.html"]']) ||
+        findMenuChildHref(services, "Safaris") ||
+        services?.href ||
+        "#"
+    }
+  ];
+}
+
+function buildDockItems(menuData) {
+  const home = findMenuItem(menuData, "Home");
+  const destinations = findMenuItem(menuData, "Destinations");
+  const experiences = findMenuItem(menuData, "Experiences") || findMenuItem(menuData, "Brands");
+  const services = findMenuItem(menuData, "Services");
+  const about = findMenuItem(menuData, "About");
+  const contactItem = findMenuItem(menuData, "Contact");
+
+  return [
+    {
+      key: "home",
+      label: "Home",
+      href: home?.href || "#",
+      matches: [home?.href].filter(Boolean),
+      icon: `
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M3 10.5 12 3l9 7.5"></path>
+          <path d="M5.5 9.5V21h13V9.5"></path>
+        </svg>
+      `
+    },
+    {
+      key: "destinations",
+      label: "Destinations",
+      href: destinations?.href || "#",
+      matches: [destinations?.href].filter(Boolean),
+      icon: `
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 21s6-5.2 6-11a6 6 0 1 0-12 0c0 5.8 6 11 6 11Z"></path>
+          <path d="M12 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"></path>
+        </svg>
+      `
+    },
+    {
+      key: "trips",
+      label: "Trips",
+      href: experiences?.href || services?.href || "#",
+      matches: [experiences?.href, services?.href].filter(Boolean),
+      icon: `
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M8 7V5.5A1.5 1.5 0 0 1 9.5 4h5A1.5 1.5 0 0 1 16 5.5V7"></path>
+          <path d="M4.5 8.5h15A1.5 1.5 0 0 1 21 10v8.5A1.5 1.5 0 0 1 19.5 20h-15A1.5 1.5 0 0 1 3 18.5V10a1.5 1.5 0 0 1 1.5-1.5Z"></path>
+          <path d="M3 12h18"></path>
+        </svg>
+      `
+    },
+    {
+      key: "profile",
+      label: "Profile",
+      href: about?.href || contactItem?.href || "#",
+      matches: [about?.href, contactItem?.href].filter(Boolean),
+      icon: `
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 12.5a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"></path>
+          <path d="M4.5 20a7.5 7.5 0 0 1 15 0"></path>
+        </svg>
+      `
+    }
+  ];
 }
 
 function getDirectChild(element, tagName) {
@@ -278,7 +228,7 @@ function getLinkLabel(link) {
   const href = normalizePath(link.getAttribute("href") || "");
   const ariaLabel = (link.getAttribute("aria-label") || "").trim();
 
-  if (href === "/search" || link.classList.contains("search-icon")) {
+  if (link.classList.contains("search-icon") || /(^|\/)search$/i.test(href)) {
     return "Search";
   }
 
@@ -335,11 +285,12 @@ function buildMenuDataFromDesktop() {
   return items;
 }
 
-function ensureLogoLink() {
+function ensureLogoLink(menuData) {
   const logoWrap = topbar ? topbar.querySelector(".logo") : null;
   const image = document.getElementById("zanLogo") || (logoWrap ? logoWrap.querySelector("img") : null);
+  const homeHref = findMenuItem(menuData, "Home")?.href || "";
 
-  if (!logoWrap || !image) {
+  if (!logoWrap || !image || !homeHref) {
     logo = image;
     return;
   }
@@ -348,14 +299,13 @@ function ensureLogoLink() {
 
   if (!existingLink) {
     const link = document.createElement("a");
-    link.href = toRelativeSiteHref("");
+    link.href = homeHref;
     link.className = "logo-link";
     link.setAttribute("aria-label", "ZanOdysseys home");
     logoWrap.insertBefore(link, image);
     link.append(image);
   } else {
     existingLink.classList.add("logo-link");
-    existingLink.setAttribute("href", toRelativeSiteHref(""));
     if (!existingLink.getAttribute("aria-label")) {
       existingLink.setAttribute("aria-label", "ZanOdysseys home");
     }
@@ -403,13 +353,13 @@ function ensureMenuToggle() {
 }
 
 function renderMobileNavItem(item, currentPath, index) {
+  const sectionKey = getSectionKey(item.label);
   const itemPath = normalizePath(item.href);
   const children = Array.isArray(item.children) ? item.children : [];
-  const itemCurrent = isPathWithin(currentPath, itemPath);
+  const itemCurrent = isPathWithin(currentPath, itemPath, sectionKey === "home");
   const childCurrent = children.some(child => isPathWithin(currentPath, normalizePath(child.href)));
   const sectionCurrent = itemCurrent || childCurrent;
   const sectionOpen = children.length > 0 && (childCurrent || itemCurrent);
-  const sectionKey = getSectionKey(item.label);
   const detail = menuDetails[sectionKey] || null;
   const linkContent = `
     <span class="mobile-nav__copy">
@@ -466,15 +416,17 @@ function renderMobileNavItem(item, currentPath, index) {
   `;
 }
 
-function buildMobileNavMarkup(menuData) {
+function buildMobileNavMarkup(menuData, bookingHref) {
   const currentPath = normalizePath(window.location.pathname);
+  const destinationsHref = findMenuItem(menuData, "Destinations")?.href || "#";
+  const highlights = buildMenuHighlights(menuData);
   const itemsMarkup = menuData
     .map((item, index) => renderMobileNavItem(item, currentPath, index))
     .join("");
-  const highlightsMarkup = menuHighlights
+  const highlightsMarkup = highlights
     .map(
       highlight => `
-        <a class="mobile-nav__highlight" href="${escapeHtml(toRelativeSiteHref(highlight.sitePath))}">
+        <a class="mobile-nav__highlight" href="${escapeHtml(highlight.href)}">
           <span class="mobile-nav__highlight-label">${escapeHtml(highlight.label)}</span>
           <span class="mobile-nav__highlight-meta">${escapeHtml(highlight.meta)}</span>
         </a>
@@ -492,8 +444,8 @@ function buildMobileNavMarkup(menuData) {
           ${highlightsMarkup}
         </div>
         <div class="mobile-nav__actions">
-          <a class="mobile-nav__hero-link" href="${toRelativeSiteHref(BOOKING_SITE_PATH)}">Plan My Journey</a>
-          <a class="mobile-nav__secondary-link" href="${toRelativeSiteHref("destinations/")}">View Destinations</a>
+          <a class="mobile-nav__hero-link" href="${escapeHtml(bookingHref)}">Plan My Journey</a>
+          <a class="mobile-nav__secondary-link" href="${escapeHtml(destinationsHref)}">View Destinations</a>
         </div>
       </div>
       <ul class="mobile-nav__list">
@@ -501,13 +453,13 @@ function buildMobileNavMarkup(menuData) {
       </ul>
       <div class="mobile-nav__footer">
         <p class="mobile-nav__footer-note">Need a custom route?</p>
-        <a class="mobile-nav__cta" href="${toRelativeSiteHref(BOOKING_SITE_PATH)}">Book Now</a>
+        <a class="mobile-nav__cta" href="${escapeHtml(bookingHref)}">Book Now</a>
       </div>
     </div>
   `;
 }
 
-function ensureMobileNav() {
+function ensureMobileNav(menuData, bookingHref) {
   let nav = document.getElementById("mobileNav");
 
   if (!nav && topbar) {
@@ -524,14 +476,13 @@ function ensureMobileNav() {
   nav.setAttribute("aria-label", "Mobile navigation");
   nav.setAttribute("role", "navigation");
 
-  const menuData = buildMenuDataFromDesktop();
   if (!menuData.length) {
     nav.innerHTML = "";
     mobileNav = nav;
     return nav;
   }
 
-  nav.innerHTML = buildMobileNavMarkup(menuData);
+  nav.innerHTML = buildMobileNavMarkup(menuData, bookingHref);
 
   mobileNav = nav;
   return nav;
@@ -640,15 +591,16 @@ function bindMobileNavEvents() {
 }
 
 function isDockItemCurrent(item, currentPath) {
-  return item.matches.some(match => isPathWithin(currentPath, normalizePath(match)));
+  return item.matches.some(match => isPathWithin(currentPath, normalizePath(match), item.key === "home"));
 }
 
-function ensureBottomDock() {
+function ensureBottomDock(menuData, bookingHref) {
   if (!document.body) return;
 
   document.body.classList.add("has-mobile-dock");
 
   const currentPath = normalizePath(window.location.pathname);
+  const dockItems = buildDockItems(menuData);
 
   let dock = document.querySelector(".bottom-nav");
   if (!dock) {
@@ -663,7 +615,7 @@ function ensureBottomDock() {
       const isActive = isDockItemCurrent(item, currentPath);
 
       return `
-        <a class="bottom-nav__link${isActive ? " is-active" : ""}" href="${toRelativeSiteHref(item.sitePath)}">
+        <a class="bottom-nav__link${isActive ? " is-active" : ""}" href="${item.href}">
           <span class="bottom-nav__icon" aria-hidden="true">${item.icon}</span>
           <span class="bottom-nav__label">${item.label}</span>
         </a>
@@ -678,7 +630,7 @@ function ensureBottomDock() {
     document.body.append(fab);
   }
 
-  fab.href = toRelativeSiteHref(BOOKING_SITE_PATH);
+  fab.href = bookingHref;
   fab.setAttribute("aria-label", "Book Now");
   fab.innerHTML = '<span class="mobile-fab__text">Book Now</span><span class="mobile-fab__icon" aria-hidden="true">&#8594;</span>';
 }
@@ -737,12 +689,13 @@ function initializeSiteChrome() {
   topbar = document.querySelector(".topbar");
   contact = document.getElementById("contact") || document.querySelector(".contact");
   chevron = document.getElementById("chevron") || document.querySelector(".chevron");
+  const menuData = buildMenuDataFromDesktop();
+  const bookingHref = getBookingHref(menuData);
 
-  rewriteRootRelativeLinks(document);
-  ensureLogoLink();
+  ensureLogoLink(menuData);
   ensureMenuToggle();
-  ensureMobileNav();
-  ensureBottomDock();
+  ensureMobileNav(menuData, bookingHref);
+  ensureBottomDock(menuData, bookingHref);
 
   if (menuToggle && mobileNav) {
     ensureMobileNavBackdrop();
