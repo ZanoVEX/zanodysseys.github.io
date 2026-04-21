@@ -335,7 +335,7 @@ body{
       rgba(0,0,0,0.45),
       rgba(0,0,0,0.55)
     ),
-    url("/static/images/legacy/destinations/hero.jpg") center / cover no-repeat;
+    url("../images/legacy/destinations/hero.jpg") center / cover no-repeat;
 }
 
 .destinations-hero h1 {
@@ -364,11 +364,11 @@ body{
 
 /* BACKGROUNDS */
 .destination-card.zanzibar {
-  background-image: url("/static/images/legacy/destinations/zanzibar/hero.jpg");
+  background-image: url("../images/legacy/destinations/zanzibar/hero.jpg");
 }
 
 .destination-card.mainland {
-  background-image: url("/static/images/legacy/destinations/mainland/hero.jpg");
+  background-image: url("../images/legacy/destinations/mainland/hero.jpg");
 }
 
 /* OVERLAY */

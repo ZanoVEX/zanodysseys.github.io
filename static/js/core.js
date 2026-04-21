@@ -1,5 +1,5 @@
 const NAV_BREAKPOINT = 1000;
-const BOOKING_HREF = "/contact/?topic=booking";
+const BOOKING_SITE_PATH = "contact/?topic=booking";
 
 const menuDetails = {
   home: {
@@ -32,17 +32,17 @@ const menuHighlights = [
   {
     label: "Stone Town",
     meta: "Historic mornings",
-    href: "/destinations/zanzibar.html"
+    sitePath: "destinations/zanzibar.html"
   },
   {
     label: "Beach Days",
     meta: "Sandbanks and dhow light",
-    href: "/services/excursions.html"
+    sitePath: "services/excursions.html"
   },
   {
     label: "Safari Routes",
     meta: "Mainland wilderness",
-    href: "/services/safaris.html"
+    sitePath: "services/safaris.html"
   }
 ];
 
@@ -50,7 +50,7 @@ const dockItems = [
   {
     key: "home",
     label: "Home",
-    href: "/",
+    sitePath: "",
     matches: ["/"],
     icon: `
       <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -62,7 +62,7 @@ const dockItems = [
   {
     key: "destinations",
     label: "Destinations",
-    href: "/destinations/",
+    sitePath: "destinations/",
     matches: ["/destinations/"],
     icon: `
       <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -74,7 +74,7 @@ const dockItems = [
   {
     key: "trips",
     label: "Trips",
-    href: "/experiences/",
+    sitePath: "experiences/",
     matches: ["/experiences/", "/services/"],
     icon: `
       <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -87,7 +87,7 @@ const dockItems = [
   {
     key: "profile",
     label: "Profile",
-    href: "/about/",
+    sitePath: "about/",
     matches: ["/about/", "/contact/"],
     icon: `
       <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -105,6 +105,7 @@ let logo = null;
 let menuToggle = null;
 let mobileNav = null;
 let mobileNavBackdrop = null;
+let siteRootPath = null;
 
 function getSectionKey(label = "") {
   return String(label)
@@ -121,16 +122,127 @@ function escapeHtml(value = "") {
     .replace(/>/g, "&gt;");
 }
 
+function ensureLeadingSlash(value = "/") {
+  return value.startsWith("/") ? value : `/${value}`;
+}
+
+function ensureTrailingSlash(value = "/") {
+  if (!value) return "/";
+  return value.endsWith("/") ? value : `${value}/`;
+}
+
+function getSiteRootPath() {
+  if (siteRootPath) return siteRootPath;
+
+  const coreScript = Array.from(document.scripts || []).find(script => {
+    const src = script?.src || script?.getAttribute("src") || "";
+    return /(?:^|\/)static\/js\/core\.js(?:[?#].*)?$/i.test(src) || /(?:^|\/)core\.js(?:[?#].*)?$/i.test(src);
+  });
+
+  if (coreScript?.src) {
+    try {
+      const pathname = new URL(coreScript.src, window.location.href).pathname || "/";
+      siteRootPath = ensureTrailingSlash(pathname.replace(/static\/js\/core\.js$/i, "").replace(/\/{2,}/g, "/"));
+      return siteRootPath;
+    } catch {
+      // Fall through to DOM-based detection.
+    }
+  }
+
+  const homeLink = document.querySelector(".topbar nav a[href], .footer a[href], .logo a[href]");
+  if (homeLink) {
+    try {
+      const pathname = new URL(homeLink.getAttribute("href") || ".", window.location.href).pathname || "/";
+      siteRootPath = ensureTrailingSlash(pathname.replace(/index\.html$/i, "").replace(/\/{2,}/g, "/"));
+      return siteRootPath;
+    } catch {
+      // Fall through to the current directory.
+    }
+  }
+
+  siteRootPath = ensureTrailingSlash((new URL(".", window.location.href).pathname || "/").replace(/\/{2,}/g, "/"));
+  return siteRootPath;
+}
+
+function stripSiteRoot(pathname = "/") {
+  let value = ensureLeadingSlash(String(pathname || "/").replace(/index\.html$/i, ""));
+  const rootPath = getSiteRootPath();
+  const rootWithoutTrailingSlash = rootPath.length > 1 ? rootPath.replace(/\/+$/, "") : "/";
+  const lowerValue = value.toLowerCase();
+  const lowerRoot = rootPath.toLowerCase();
+  const lowerRootNoSlash = rootWithoutTrailingSlash.toLowerCase();
+
+  if (rootPath !== "/" && lowerValue === lowerRootNoSlash) {
+    value = "/";
+  } else if (rootPath !== "/" && lowerValue.startsWith(lowerRoot)) {
+    value = `/${value.slice(rootPath.length)}`;
+  }
+
+  value = value.replace(/\/{2,}/g, "/");
+  return value || "/";
+}
+
+function toRelativePath(fromPath = "/", toPath = "/") {
+  const fromSegments = String(fromPath || "/").split("/").filter(Boolean);
+  const toSegments = String(toPath || "/").split("/").filter(Boolean);
+  let index = 0;
+
+  while (
+    index < fromSegments.length &&
+    index < toSegments.length &&
+    fromSegments[index].toLowerCase() === toSegments[index].toLowerCase()
+  ) {
+    index += 1;
+  }
+
+  const upSegments = new Array(fromSegments.length - index).fill("..");
+  const downSegments = toSegments.slice(index);
+  let relativePath = [...upSegments, ...downSegments].join("/");
+
+  if (!relativePath) {
+    relativePath = toPath.endsWith("/") ? "./" : toSegments[toSegments.length - 1] || "./";
+  } else if (toPath.endsWith("/") && !relativePath.endsWith("/")) {
+    relativePath += "/";
+  }
+
+  return relativePath;
+}
+
+function toRelativeSiteHref(sitePath = "") {
+  const cleanPath = String(sitePath || "").trim().replace(/^\/+/, "");
+  const currentDirectory = new URL(".", window.location.href);
+  const targetUrl = new URL(cleanPath || ".", `${window.location.origin}${getSiteRootPath()}`);
+  const relativePath = toRelativePath(currentDirectory.pathname, targetUrl.pathname);
+  return `${relativePath}${targetUrl.search}${targetUrl.hash}`;
+}
+
+function rewriteRootRelativeLinks(scope = document) {
+  if (!scope?.querySelectorAll) return;
+
+  scope.querySelectorAll('a[href^="/"]:not([href^="//"])').forEach(link => {
+    const href = (link.getAttribute("href") || "").trim();
+    if (!href || /^(https?:|mailto:|tel:|javascript:|data:)/i.test(href)) return;
+    link.setAttribute("href", toRelativeSiteHref(href));
+  });
+
+  scope.querySelectorAll('form[action^="/"]:not([action^="//"])').forEach(form => {
+    const action = (form.getAttribute("action") || "").trim();
+    if (!action || /^(https?:|mailto:|tel:|javascript:|data:)/i.test(action)) return;
+    form.setAttribute("action", toRelativeSiteHref(action));
+  });
+}
+
 function normalizePath(value = "") {
   if (!value) return "/";
-  if (/^(mailto:|tel:|javascript:)/i.test(value)) return "";
+  if (/^(mailto:|tel:|javascript:|data:)/i.test(value)) return "";
 
   try {
-    value = new URL(value, window.location.origin).pathname || "/";
+    value = new URL(value, window.location.href).pathname || "/";
   } catch {
     value = value.split(/[?#]/)[0] || "/";
   }
 
+  value = stripSiteRoot(value);
   value = value.replace(/index\.html$/i, "");
 
   if (!value.startsWith("/")) {
@@ -236,13 +348,14 @@ function ensureLogoLink() {
 
   if (!existingLink) {
     const link = document.createElement("a");
-    link.href = "/";
+    link.href = toRelativeSiteHref("");
     link.className = "logo-link";
     link.setAttribute("aria-label", "ZanOdysseys home");
     logoWrap.insertBefore(link, image);
     link.append(image);
   } else {
     existingLink.classList.add("logo-link");
+    existingLink.setAttribute("href", toRelativeSiteHref(""));
     if (!existingLink.getAttribute("aria-label")) {
       existingLink.setAttribute("aria-label", "ZanOdysseys home");
     }
@@ -361,7 +474,7 @@ function buildMobileNavMarkup(menuData) {
   const highlightsMarkup = menuHighlights
     .map(
       highlight => `
-        <a class="mobile-nav__highlight" href="${escapeHtml(highlight.href)}">
+        <a class="mobile-nav__highlight" href="${escapeHtml(toRelativeSiteHref(highlight.sitePath))}">
           <span class="mobile-nav__highlight-label">${escapeHtml(highlight.label)}</span>
           <span class="mobile-nav__highlight-meta">${escapeHtml(highlight.meta)}</span>
         </a>
@@ -379,8 +492,8 @@ function buildMobileNavMarkup(menuData) {
           ${highlightsMarkup}
         </div>
         <div class="mobile-nav__actions">
-          <a class="mobile-nav__hero-link" href="${BOOKING_HREF}">Plan My Journey</a>
-          <a class="mobile-nav__secondary-link" href="/destinations/">View Destinations</a>
+          <a class="mobile-nav__hero-link" href="${toRelativeSiteHref(BOOKING_SITE_PATH)}">Plan My Journey</a>
+          <a class="mobile-nav__secondary-link" href="${toRelativeSiteHref("destinations/")}">View Destinations</a>
         </div>
       </div>
       <ul class="mobile-nav__list">
@@ -388,7 +501,7 @@ function buildMobileNavMarkup(menuData) {
       </ul>
       <div class="mobile-nav__footer">
         <p class="mobile-nav__footer-note">Need a custom route?</p>
-        <a class="mobile-nav__cta" href="${BOOKING_HREF}">Book Now</a>
+        <a class="mobile-nav__cta" href="${toRelativeSiteHref(BOOKING_SITE_PATH)}">Book Now</a>
       </div>
     </div>
   `;
@@ -550,7 +663,7 @@ function ensureBottomDock() {
       const isActive = isDockItemCurrent(item, currentPath);
 
       return `
-        <a class="bottom-nav__link${isActive ? " is-active" : ""}" href="${item.href}">
+        <a class="bottom-nav__link${isActive ? " is-active" : ""}" href="${toRelativeSiteHref(item.sitePath)}">
           <span class="bottom-nav__icon" aria-hidden="true">${item.icon}</span>
           <span class="bottom-nav__label">${item.label}</span>
         </a>
@@ -565,7 +678,7 @@ function ensureBottomDock() {
     document.body.append(fab);
   }
 
-  fab.href = BOOKING_HREF;
+  fab.href = toRelativeSiteHref(BOOKING_SITE_PATH);
   fab.setAttribute("aria-label", "Book Now");
   fab.innerHTML = '<span class="mobile-fab__text">Book Now</span><span class="mobile-fab__icon" aria-hidden="true">&#8594;</span>';
 }
@@ -625,6 +738,7 @@ function initializeSiteChrome() {
   contact = document.getElementById("contact") || document.querySelector(".contact");
   chevron = document.getElementById("chevron") || document.querySelector(".chevron");
 
+  rewriteRootRelativeLinks(document);
   ensureLogoLink();
   ensureMenuToggle();
   ensureMobileNav();
