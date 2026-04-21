@@ -23,6 +23,7 @@
 }
 .hero-text-us{
   width:50%;
+  min-width:0;
 }
 .hero-text-us h1{
   font-family:"Great Vibes",serif;
@@ -68,11 +69,13 @@
   padding:26px;
   border-radius:18px;
   display:flex;
+  flex-wrap:wrap;
   gap:24px;
   align-items:center;
 }
 .founder-img{
-  width:400px;
+  width:100%;
+  max-width:400px;
   height:200px;
   border-radius:50%;
   overflow:hidden;
@@ -154,5 +157,8 @@
 }
 @media(max-width:600px){
   .collage{grid-template-columns:1fr;}
-  .founder-img {width: 600px; }
+  .founder-img {
+    max-width: 320px;
+    margin: 0 auto;
+  }
 }

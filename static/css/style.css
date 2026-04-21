@@ -1,5 +1,12 @@
-   html{
+html{
   scroll-behavior:smooth;
+  scroll-padding-top: calc(var(--height) + 18px);
+}
+
+html,
+body {
+  overflow-x: hidden;
+  max-width: 100vw;
 }
 
 :root {
@@ -18,16 +25,71 @@
   --blue:#01333f;
   --dark1:#011d24;
   --dark2:#022730;
- --font-family: 'Great Vibes', serif;
+  --font-family: 'Great Vibes', serif;
+  --nav-surface: rgba(4, 39, 51, 0.78);
+  --nav-surface-strong: rgba(5, 45, 57, 0.96);
+  --nav-border: rgba(255, 255, 255, 0.14);
+  --nav-shadow: 0 24px 60px rgba(0, 10, 16, 0.34);
+  --surface-soft: rgba(255, 255, 255, 0.07);
+  --surface-strong: rgba(255, 255, 255, 0.12);
+  --text-soft: rgba(255, 255, 255, 0.76);
+  --mobile-dock-height: 88px;
+  --mobile-fab-lift: 118px;
 }
-*{box-sizing:border-box;margin:0;padding:0}
+*,
+*::before,
+*::after{box-sizing:border-box;margin:0;padding:0}
+
+img,
+video{
+  display:block;
+  max-width:100%;
+  height:auto;
+}
+
+iframe,
+canvas,
+svg{
+  max-width:100%;
+}
 body {
   margin: 0;
-  background: linear-gradient(180deg,var(--dark2),#042f3e);
+  background:
+    radial-gradient(circle at top, rgba(182, 240, 211, 0.18), transparent 36%),
+    radial-gradient(circle at 85% 8%, rgba(236, 153, 75, 0.14), transparent 24%),
+    linear-gradient(180deg, #042b36 0%, #03212a 46%, #01161d 100%);
   color: var(--text);
   overflow-x: hidden;
+  width: 100%;
+  position: relative;
   font-family: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
   font-size: 16px;
+}
+
+body.menu-open{
+  overflow: hidden;
+}
+
+.debug-overflow *{
+  outline: 1px solid red !important;
+}
+
+body .hero-img-henna{
+  width: 100%;
+  max-width: 480px;
+}
+
+body .hero-text-henna{
+  min-width: 0;
+}
+
+body .search-input-area{
+  flex-wrap: wrap;
+}
+
+body .search-input-area input,
+body .search-input-area button{
+  max-width: 100%;
 }
 
 /* Full Screen Loading Background */
@@ -36,8 +98,9 @@ body {
   inset: 0;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  max-width: 100%;
+  height: 100dvh;
   background: linear-gradient(180deg, #022730, #001c24);
   display: flex;
   justify-content: center;
@@ -153,27 +216,16 @@ line-height: 1.2;
   }
 }
 
-@font-face {
-  font-family: 'Great Vibes';
-  src: url('../assets/fonts/GreatVibes-Regular.woff2') format('woff2');
-  font-weight: normal;
-  font-style: normal;
+@media (max-width: 1000px) {
+  :root {
+    --height: 84px;
+    --pad: 18px;
+    --mobile-dock-height: 90px;
+    --mobile-fab-lift: 122px;
+  }
+
+  body {
+    font-size: 15px;
+  }
 }
 
-@font-face {
-  font-family: 'Montserrat';
-  src: url('../assets/fonts/Montserrat-Regular.woff2') format('woff2');
-  font-weight: 400;
-}
-
-@font-face {
-  font-family: 'Montserrat';
-  src: url('../assets/fonts/Montserrat-Medium.woff2') format('woff2');
-  font-weight: 500;
-}
-
-@font-face {
-  font-family: 'Montserrat';
-  src: url('../assets/fonts/Montserrat-Bold.woff2') format('woff2');
-  font-weight: 700;
-}

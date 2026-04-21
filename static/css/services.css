@@ -93,7 +93,8 @@
       justify-content:center;
     }
     .hero-photo{
-      width:420px;
+      width:100%;
+      max-width:420px;
       height:360px;
       border-radius:22px;
       overflow:hidden;
@@ -224,6 +225,10 @@
 .services-page {
   padding: 90px 20px;
 }
+
+#services-list > div > div:first-child{
+  flex-wrap: wrap;
+}
     /* Responsive */
     @media (max-width:1100px){
       .hero-split{ grid-template-columns: 1fr 420px; gap:22px; padding:26px; }
@@ -245,4 +250,35 @@
 }
 .btn:hover {
   background: #1ebe5d;
+}
+
+.hero-right,
+.service-body,
+.cta-band .left,
+.cta-band .right{
+  min-width: 0;
+}
+
+@media (max-width:760px){
+  .service-card{
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .service-icon{
+    margin: 0 auto;
+  }
+
+  .service-actions,
+  .cta-band,
+  .cta-band .right{
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .service-actions a,
+  .cta-band .right a{
+    width: 100%;
+    text-align: center;
+  }
 }

@@ -70,7 +70,8 @@ body{
   padding:20px;
 }
 
-.hero-text2 h1{
+.hero-text2 h1,
+.hero-text2 h2{
   margin:0;
   font-family:"Great Vibes", serif;
   font-size:3.6rem;
@@ -253,7 +254,8 @@ body{
     grid-template-columns:1fr;
   }
 
-  .hero-text2 h1{
+  .hero-text2 h1,
+  .hero-text2 h2{
     font-size:2.8rem;
   }
 }
@@ -333,7 +335,7 @@ body{
       rgba(0,0,0,0.45),
       rgba(0,0,0,0.55)
     ),
-    url("../../images/destinations/hero.jpg") center / cover no-repeat;
+    url("/static/images/legacy/destinations/hero.jpg") center / cover no-repeat;
 }
 
 .destinations-hero h1 {
@@ -362,11 +364,11 @@ body{
 
 /* BACKGROUNDS */
 .destination-card.zanzibar {
-  background-image: url("../../images/destinations/zanzibar/hero.jpg");
+  background-image: url("/static/images/legacy/destinations/zanzibar/hero.jpg");
 }
 
 .destination-card.mainland {
-  background-image: url("../../images/destinations/mainland/hero.jpg");
+  background-image: url("/static/images/legacy/destinations/mainland/hero.jpg");
 }
 
 /* OVERLAY */

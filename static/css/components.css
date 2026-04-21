@@ -63,7 +63,8 @@
   font-size: 2.6rem;
   color: var(--gold);
 }
-.rating ion-icon {
+.rating ion-icon,
+.rating .rating-star {
   color: gold;
   font-size: 16px;
 }

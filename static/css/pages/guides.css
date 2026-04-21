@@ -16,7 +16,8 @@
   box-shadow:0 12px 30px rgba(0,0,0,0.45);
 }
 .hero-img-g{
-  width:420px;
+  width:100%;
+  max-width:420px;
   height:300px;
   overflow:hidden;
   border-radius:18px;
@@ -34,6 +35,10 @@
   max-width:600px;
   line-height:1.6;
   color:#e5faf7;
+}
+
+.hero-text-g{
+  min-width: 0;
 }
 
 /* Section Title */

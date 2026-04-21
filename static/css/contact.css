@@ -11,7 +11,8 @@
   box-shadow:0 12px 30px rgba(0,0,0,0.45);
 }
 .hero-img-con{
-  width:420px;
+  width:100%;
+  max-width:420px;
   height:300px;
   overflow:hidden;
   border-radius:18px;
@@ -31,6 +32,10 @@
   margin-top:12px;
   line-height:1.7;
   color:#d8faf3;
+}
+
+.hero-text-con{
+  min-width: 0;
 }
 
 /* Contact Form */

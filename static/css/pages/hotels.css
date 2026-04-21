@@ -1,0 +1,139 @@
+
+
+/* Hero */
+.hero6{
+  display:flex;
+  gap:28px;
+  padding:36px;
+  background:var(--glass);
+  border-radius:18px;
+  border:1px solid var(--border);
+  box-shadow:0 12px 30px rgba(0,0,0,0.45);
+}
+.hero-img6{
+  width:100%;
+  max-width:420px;
+  height:300px;
+  border-radius:18px;
+  overflow:hidden;
+}
+.hero-img6 img{
+  width:100%;height:100%;object-fit:cover;
+}
+.hero-text6 h1{
+  font-family:"Great Vibes",serif;
+  font-size:3rem;
+  margin:0;
+  color:var(--amba);
+}
+.hero-text6 p{
+  line-height:1.7;
+  max-width:600px;
+  color:#defaf4;
+}
+
+.hero-text6{
+  min-width: 0;
+}
+
+/* Section Title */
+.section-title{
+  margin-top:40px;
+}
+.section-title h2{
+  font-family:"Great Vibes",serif;
+  font-size:2.4rem;
+  color:var(--amba);
+  margin:0;
+}
+.section-title p{
+  color:#d8f9f3;
+  margin-top:4px;
+}
+
+/* Hotel Grid */
+.hotel-grid{
+  margin-top:24px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:24px;
+}
+.hotel-card{
+  background:var(--glass);
+  border-radius:16px;
+  border:1px solid var(--border);
+  box-shadow:0 10px 28px rgba(0,0,0,0.4);
+  overflow:hidden;
+}
+.hotel-img{
+  height:200px;
+}
+.hotel-img img{
+  width:100%;height:100%;object-fit:cover;
+}
+.hotel-body{
+  padding:18px;
+}
+.hotel-body h3{
+  margin:0;
+  color:var(--amba);
+}
+.hotel-body p{
+  margin-top:6px;
+  color:#d8f9f3;
+  font-size:0.95rem;
+}
+.amenities{
+  margin-top:10px;
+  font-size:0.9rem;
+  color:#cffff6;
+}
+.amenities i{
+  margin-right:6px;
+}
+
+.btn-primary{
+  background:var(--amba);
+  padding:10px 16px;
+  border-radius:10px;
+  margin-top:14px;
+  display:inline-block;
+  font-weight:700;
+  text-decoration:none;
+  color:#022730;
+}
+
+/* Categories */
+.category-box{
+  background:var(--glass);
+  padding:22px;
+  border-radius:16px;
+  border:1px solid var(--border);
+  margin-top:20px;
+}
+.category-box h3{
+  margin:0;
+  color:var(--amba);
+}
+.category-box p{
+  margin-top:4px;
+  color:#d8f9f3;
+}
+
+@media(max-width:900px){
+  .hotel-grid{
+    grid-template-columns:1fr 1fr;
+  }
+  .hero6{
+    flex-direction:column;
+  }
+
+  .hero-img6{
+    max-width: 100%;
+  }
+}
+@media(max-width:600px){
+  .hotel-grid{
+    grid-template-columns:1fr;
+  }
+}

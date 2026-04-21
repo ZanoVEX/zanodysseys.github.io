@@ -22,7 +22,8 @@
 }
 .hero-img{
   
-  width:390px;
+  width:100%;
+  max-width:390px;
   height:300px;
   border-radius:18px;
   overflow:hidden;
@@ -41,6 +42,10 @@
   max-width:620px;
   line-height:1.7;
   color:#dffaf6;
+}
+
+.hero-text{
+  min-width: 0;
 }
 
 /* Section Title */
@@ -155,6 +160,10 @@
   .case-grid{grid-template-columns:1fr;}
   .option-grid{grid-template-columns:1fr 1fr;}
   .hero{flex-direction:column;}
+
+  .hero-img{
+    max-width: 100%;
+  }
 }
 @media(max-width:600px){
   .option-grid{grid-template-columns:1fr;}

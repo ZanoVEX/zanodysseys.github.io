@@ -1,0 +1,17 @@
+.gallery-grid,
+.mixed-gallery,
+.img-mixer {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+.gallery-grid img,
+.mixed-gallery img,
+.img-mixer img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 18px;
+  object-fit: cover;
+}
